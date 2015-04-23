@@ -31,10 +31,13 @@ class GithubService {
     }
     
     let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-      if error == nil {
+      if error != nil {
+        completionHandler(nil, error.description)
+      }
+      else if error == nil {
         if let httpResponse = response as? NSHTTPURLResponse {
           switch httpResponse.statusCode {
-          case 200:
+          case 201:
             let repos = GithubJSONParser.reposFromJSONData(data)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
               completionHandler(repos, nil)
