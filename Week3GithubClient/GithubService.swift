@@ -37,7 +37,7 @@ class GithubService {
       else if error == nil {
         if let httpResponse = response as? NSHTTPURLResponse {
           switch httpResponse.statusCode {
-          case 201:
+          case 200...299:
             let repos = GithubJSONParser.reposFromJSONData(data)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
               completionHandler(repos, nil)

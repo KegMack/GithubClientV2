@@ -49,6 +49,11 @@ class UserDetailViewController: UIViewController {
     }
   }
   
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    self.user = nil
+  }
+  
   func updateUI() {
     self.nameLabel.text = self.user?.name
     self.locationLabel.text = self.user?.location
